@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from '../../axios'
+import './Row.css'
 
 const baseurl = 'https://image.tmdb.org/t/p/original/'
 
@@ -25,7 +26,7 @@ const Row = ({ title, fetchUrl }) => {
       <div className='row-posters'>
         {/* row-poster */}
         {movies.map(movie => (
-          <img src={`${baseurl}${movie.poster_path}`} alt={movie.name} />
+          <img className='row-poster' src={`${baseurl}${movie.poster_path}`} alt={movie.name} />
         ))}
       </div>
     </div>
