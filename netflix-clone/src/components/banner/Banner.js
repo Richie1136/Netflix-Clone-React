@@ -7,6 +7,10 @@ const Banner = ({ title }) => {
 
   const [movie, setMovie] = useState([])
 
+  const truncate = (str, n) => {
+    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const request = await axios.get(requests.fetchNetflixOriginals)
@@ -19,11 +23,12 @@ const Banner = ({ title }) => {
   return (
     <header className='banner' style={{ backgroundSize: "cover", backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`, backgroundPosition: "center center" }}>
       <div className='banner-content'>
-        <h1>{movie?.title || movie.name || movie.original_name}</h1>
-        {/* title */}
-        {/* div 2 buttons */}
-        <p>{movie.overview}</p>
-        {/* description */}
+        <h1 className='banner-title'>{movie?.title || movie.name || movie.original_name}</h1>
+        <div className='banner-buttons'>
+          <button className='banner-button'>Play</button>
+          <button className='banner-button'>My List</button>
+        </div>
+        <h1 className='banner-description'>{truncate(movie?.overview, 150)}</h1>
       </div>
     </header>
   )
